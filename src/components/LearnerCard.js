@@ -5,11 +5,14 @@ import { useHistory } from "react-router-dom";
 
 function LearnerCard(props) {
   const [token, setToken] = useState(false)
+  const history = useHistory();
 
   useEffect(() => {
     setToken(JSON.parse(localStorage.getItem('token')))
   },[])
+
   const onClickHandler = () => {
+    localStorage.setItem('routeId', props.data.id)
     if(token === true) {
       history.push(`${props.data.id}/profile`)
     }
@@ -18,7 +21,6 @@ function LearnerCard(props) {
     }
   }
 
-  const history = useHistory();
   return (
     <div className="learner-card" onClick={onClickHandler}>
       <Avatar name={props.data.name} round color="black" />

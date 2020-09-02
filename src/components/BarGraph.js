@@ -7,7 +7,7 @@ function BarGraph(props) {
     
     return(
         <BarChart
-        width={500}
+        width={480}
         height={300}
         data={props.data}
         margin={{

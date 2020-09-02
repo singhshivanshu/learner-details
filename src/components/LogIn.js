@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 function LogIn() {
   const [userName, setUserName] = useState("");
   const [pass, setPass] = useState("");
   const [match, setMatch] = useState(false)
+  const [routeId, setRouteId] = useState('')
 
   const history = useHistory();
+  
+  useEffect(() => {
+    let id = localStorage.getItem('routeId')
+    setRouteId(id)
+  },[])
 
   const handleLogIn = (e) => {
     e.preventDefault();
@@ -15,7 +21,7 @@ function LogIn() {
       users && users.find((user) => user.userName === userName && user.pass === pass)
     ) {
       localStorage.setItem("token", true);
-      history.push("/");
+      history.push(`${routeId}/profile`)
       setMatch(false)
     } else {
       setMatch(true)
